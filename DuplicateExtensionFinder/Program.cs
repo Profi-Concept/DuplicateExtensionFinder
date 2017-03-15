@@ -7,7 +7,7 @@
   using System.Xml;
   using System.Xml.Serialization;
 
-  class Program
+  static class Program
   {
     static readonly string[] DefaultPathsVs14 =
       {
