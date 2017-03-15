@@ -12,19 +12,20 @@
     static readonly string[] DefaultPathsVs14 =
       {
         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                    @"Microsoft\VisualStudio\14.0\Extensions"),
-        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                    @"Microsoft\VisualStudio\15.0_53c35e82\Extensions"), //C:\Users\proficoncept\AppData\Local\Microsoft\VisualStudio\15.0_53c35e82
+                    @"Microsoft\VisualStudio\15.0\Extensions"),
         Path.Combine(Environment.GetFolderPath(Environment.Is64BitOperatingSystem ? Environment.SpecialFolder.ProgramFilesX86 : Environment.SpecialFolder.ProgramFiles),
-                    @"Microsoft Visual Studio 14.0\Common7\IDE\Extensions"),
-        @"Y:\Programme\VS2017 Ent RC\Common7\IDE\Extensions"
+                    @"Microsoft Visual Studio 15.0\Common7\IDE\Extensions")
       };
 
     static void Main(string[] args)
     {
       var paths = new List<string>();
-      var pathArgs = args.Where(arg => !arg.StartsWith("-")).ToArray();
-      paths.AddRange(pathArgs.Length == 0 ? DefaultPathsVs14 : pathArgs);
+      var pathArgs = args
+          .Where(arg => !arg.StartsWith("-"))
+          .ToArray();
+      paths.AddRange(pathArgs.Length == 0
+          ? DefaultPathsVs14
+          : pathArgs);
 
       var onlyDupes = args.Any(x => string.Equals(x, "-dupes", StringComparison.OrdinalIgnoreCase));
       var doDelete = args.Any(x => string.Equals(x, "-delete", StringComparison.OrdinalIgnoreCase));
